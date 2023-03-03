@@ -1,5 +1,6 @@
 import React from "react";
-import Pokemon from "./components/pokemon/pokemon"
+import Pokemon from "./components/pokemon/pokemon";
+import Moves from './components/pokemon/moves';
 
 function App() {
   const [pokemon, setPokemon] = React.useState({});
@@ -20,7 +21,8 @@ function App() {
   }
 
   return pokemon.sprites ? (
-    <div className="bg-secondary container">
+    < div className="bg-secondary container" >
+
       <div>
         <button onClick={handleNextPokemon}>Proximo</button>
       </div>
@@ -28,7 +30,15 @@ function App() {
         asset={pokemon.sprites.front_default}
         name={pokemon.name}
         types={pokemon.types.map((type) => type.type.name).join(", ")}
-        moves={pokemon.moves.map((move) => move.move.name).join("-")}
+        moves={
+          <div className="d-flex justify-content-center align-items-center">
+            <ul>
+              {pokemon.moves.map((move) => (
+                <li key={move.move.name}>{move.move.name}</li>
+              ))}
+            </ul>
+          </div>
+        }
       />
     </div>
   ) : (
@@ -39,3 +49,4 @@ function App() {
 }
 
 export default App;
+
